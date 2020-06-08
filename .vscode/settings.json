@@ -1,0 +1,17 @@
+{
+    "python.pythonPath": "env\\Scripts\\python.exe",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "search.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "env": true,
+        "**/*.pyproj":true
+    },
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "env": true,
+        "**/*.pyproj":true
+    }
+}

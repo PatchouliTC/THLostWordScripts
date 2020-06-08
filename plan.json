@@ -1,0 +1,18 @@
+{
+    "device":"",
+    "cycle_times":1,
+    "plan":[
+        {
+            "enable":true,
+            "script":"sample1",
+            "times":15,
+            "interval":-1
+        },
+        {
+            "enable":true,
+            "script":"sample2",
+            "times":10,
+            "interval":-1
+        }
+    ]
+}

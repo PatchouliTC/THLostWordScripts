@@ -1,0 +1,6 @@
+*.zip
+env
+__pycache__
+*.pyproj
+*.pyc
+/scripts/script_resault/*
