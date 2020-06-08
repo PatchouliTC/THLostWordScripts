@@ -27,6 +27,9 @@ class ScriptBase(object):
             self.record=None
         super().__init__()
 
+    def start(self):
+        raise NotImplementedError('BaseScript-start error-No Function Defined')
+    
     def run(self):
         raise NotImplementedError('BaseScript-main error-No Function Defined')
 
