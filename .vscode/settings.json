@@ -7,13 +7,15 @@
         "**/*.pyc": true,
         "env": true,
         "**/*.pyproj":true,
-        ".gitignore":true
+        ".gitignore":true,
+        "custom_airtest":true
     },
     "files.exclude": {
         "**/__pycache__": true,
         "**/*.pyc": true,
         "env": true,
         "**/*.pyproj":true,
-        ".gitignore":true
+        ".gitignore":true,
+        "custom_airtest":true
     }
 }

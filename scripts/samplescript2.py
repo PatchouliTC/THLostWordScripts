@@ -13,7 +13,9 @@ class Sample2Script(ScriptBase):
 
     def init(self):
         self.Logger.info('sample2 init')
-
+        
+    def start(self):
+        raise NotImplementedError('BaseScript-start error-No Function Defined')
 
     def run(self):
         self.Logger.info('sample2 run')

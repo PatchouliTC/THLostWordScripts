@@ -17,7 +17,7 @@ class Record(object):
     def StartRecord(self):
         self.start_ticks = time.time()
     #结束记录并打印结果
-    def EndRecord(self, success):
+    def EndRecord(self, success:bool):
         if success:
             self.success_count += 1
         else:

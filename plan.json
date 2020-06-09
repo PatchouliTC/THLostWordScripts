@@ -3,16 +3,16 @@
     "cycle_times":1,
     "plan":[
         {
-            "enable":true,
+            "enable":false,
             "script":"sample1",
             "times":15,
             "interval":-1
         },
         {
-            "enable":true,
+            "enable":false,
             "script":"sample2",
             "times":10,
-            "interval":-1
+            "interval":30
         }
     ]
 }

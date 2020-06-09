@@ -24,39 +24,39 @@ if __name__ == "__main__":
     if not planmanager.set_plan(plans,cycletime):
         logger.info('None Plans,no more running')
         sys.exit(0)
-    # deviceavilable=False
-    # logger.info('Searching Avilable Android Devices...')
-    # try:
-    #     devices = ADB().devices(state="device")
-    #     if len(devices) == 0:
-    #         raise Exception
-    #     for dev in devices:
-    #         if device==dev[0]:
-    #             logger.debug('Find Plan Device')
-    #             deviceavilable=True
-    #             break
-    # except Exception as berr:
-    #     logger.info('No Useable Device,quit')
-    #     ADB().kill_server()
-    #     sys.exit(0)
+    deviceavilable=False
+    logger.info('Searching Avilable Android Devices...')
+    try:
+        devices = ADB().devices(state="device")
+        if len(devices) == 0:
+            raise Exception
+        for dev in devices:
+            if device==dev[0]:
+                logger.debug('Find Plan Device')
+                deviceavilable=True
+                break
+    except Exception as berr:
+        logger.info('No Useable Device,quit')
+        ADB().kill_server()
+        sys.exit(0)
     
-    # logger.info('Not find plan device in useable devices')
-    # print(f'Avilable Devices---》》》')
-    # for d in range(len(devices)):
-    #     print(f"{d+1}.{devices[d][0]}")
-    # num=int(input('Enter Num to select:'))
-    # try:
-    #     device=devices[num-1][0]
-    # except:
-    #     logger.info('Error input,select default')
-    #     device=devices[0][0]
+    logger.info('Not find plan device in useable devices')
+    print(f'Avilable Devices---》》》')
+    for d in range(len(devices)):
+        print(f"{d+1}.{devices[d][0]}")
+    num=int(input('Enter Num to select:'))
+    try:
+        device=devices[num-1][0]
+    except:
+        logger.info('Error input,select default')
+        device=devices[0][0]
 
-    # connect_device(f'android:///{device}')
+    connect_device(f'android:///{device}')
 
     planmanager.run_plans()
 
-    # logger.info('finish')
-    # ADB().kill_server()
+    logger.info('Plan_Finish')
+    ADB().kill_server()
 
 
     

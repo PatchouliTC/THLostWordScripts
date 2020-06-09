@@ -115,8 +115,8 @@ class PointMode(IntEnum):
     next=auto(),
     #重新战斗
     rebattle=auto(),
-    #无意义随机点 用于战斗结算界面进入下一步
-    anyplace=auto(),
+    #战斗结算
+    battle_success=auto(),
 
 class Skill(IntEnum):
     """
@@ -287,7 +287,7 @@ points={
     PointMode.farseek:PointSet([1110, 434], (1280, 720), 5),
     PointMode.next:PointSet([1140, 650], (1280, 720), 5),
     PointMode.rebattle:PointSet([108, 652], (1280, 720), 5),
-    PointMode.anyplace:PointSet([641, 151], (1280, 720), 5)
+    PointMode.battle_success:PointSet([641, 151], (1280, 720), 5)
 }
 
 logger.debug('cache generate finish')
