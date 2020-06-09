@@ -175,9 +175,12 @@ def GoFarSeek():
         return True
     return False
 
-def SwipeLevel():
+def SwipeLevel(up:bool=True):
     """滑动当前关卡总览"""
-    swipe(P[PM.swipe][0], P[PM.swipe][1], duration=1, steps=20)
+    if up:
+        swipe(P[PM.swipe][1], P[PM.swipe][0], duration=1, steps=20)
+    else:
+        swipe(P[PM.swipe][0], P[PM.swipe][1], duration=1, steps=20)
 
 def WaitStatic(picture=T[TM.p], max_time=5, timeout=5):
     """

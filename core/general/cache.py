@@ -26,9 +26,11 @@ class TemplateMode(IntEnum):
 
     #信息框标题
     msg_box_title=auto(),
-    #新增msg_box_confirm,msg_box_fail,msg_box_confirm_noborder
+    #信息框确定按钮
     msg_box_confirm=auto(),
+    #信息框失败时返回按钮
     msg_box_fail=auto(),
+    #信息框确定按钮-无边框
     msg_box_confirm_noborder=auto(),
 
     #战斗失败标记
@@ -56,10 +58,12 @@ class TemplateMode(IntEnum):
     farseek_temp=auto(),
 
     #P-BOOST标记-用于判断战斗界面UI移动是否结束
-    #新增spell_card,graze,skill
     p=auto(),
+    #符卡
     spell_card=auto(),
+    #结界
     graze=auto(),
+    #技能
     skill=auto(),
 
     #返回按钮
