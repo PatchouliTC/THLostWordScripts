@@ -1,5 +1,5 @@
 # -*- encoding=utf8 -*-
-from enum import IntEnum
+from enum import IntEnum,auto
 from core.general import load_img as li
 from core.setting import Settings as CST
 
@@ -14,14 +14,26 @@ ST.FIND_TIMEOUT_TMP=2
 
 class IEnum(IntEnum):
     """
-        自增IntEnum
-        X=()
+        自增IntEnum+避免重复值
+        X=auto()
     """
-    def __new__(cls):
-        value = len(cls.__members__)  # note no + 1
-        obj = int.__new__(cls)
-        obj._value_ = value
-        return obj
+    def __init__(self, *args):
+        cls = self.__class__
+        if any(self.value == e.value for e in cls):
+            a = self.name
+            e = cls(self.value).name
+            raise ValueError(f"{cls.__name__}存在值相等情况:{a}->{e}")
+    
+    #从0开始自增
+    def _generate_next_value_(name, start, count, last_values):
+        for last_value in reversed(last_values):
+            try:
+                return last_value + 1
+            except TypeError:
+                pass
+        else:
+            #I need start with 0
+            return 0
 
 class TemplateMode(IEnum):
     """
@@ -31,103 +43,103 @@ class TemplateMode(IEnum):
     """
     #战斗定义---
     #扩散平A
-    spread_shoot=(),
+    spread_shoot=auto(),
     #集中平A
-    focus_shoot=(),
+    focus_shoot=auto(),
 
     #信息框标题
-    msg_box_title=(),
+    msg_box_title=auto(),
     #信息框确定按钮
-    msg_box_confirm=(),
+    msg_box_confirm=auto(),
     #信息框失败时返回按钮
-    msg_box_fail=(),
+    msg_box_fail=auto(),
     #信息框确定按钮-无边框
-    msg_box_confirm_noborder=(),
+    msg_box_confirm_noborder=auto(),
 
     #战斗失败标记
-    battle_fail=(),
+    battle_fail=auto(),
     #战斗胜利标记
-    battle_success=(),
+    battle_success=auto(),
     #删除了旧版的结算确定按键
     #使用符卡页面展开
-    spell_expanded=(),
+    spell_expanded=auto(),
     #使用技能页面展开
-    skill_expanded=(),
+    skill_expanded=auto(),
     #战斗中菜单按钮
-    battle_menu=(),
+    battle_menu=auto(),
     #退出战斗
-    quit_battle=(),
+    quit_battle=auto(),
     #退出确认按钮
-    quit_confirm=(),
+    quit_confirm=auto(),
     #主页面探索按钮
-    explore=(),
+    explore=auto(),
     #返回主页面按钮
-    home=(),
+    home=auto(),
     #远征标记
-    farseek=(),
+    farseek=auto(),
     #临时远征标记
-    farseek_temp=(),
+    farseek_temp=auto(),
 
     #P-BOOST标记-用于判断战斗界面UI移动是否结束
-    p=(),
+    p=auto(),
     #符卡
-    spell_card=(),
+    spell_card=auto(),
     #结界
-    graze=(),
+    graze=auto(),
     #技能
-    skill=(),
+    skill=auto(),
 
     #返回按钮
-    back=(),
+    back=auto(),
     #cancel->next
-    next=(),
+    next=auto(),
     #战斗结束重新战斗按钮
-    rebattle=(),
+    rebattle=auto(),
     #准备房间出发按钮
-    startbattle=(),
+    startbattle=auto(),
 
 class OffsetMode(IEnum):
-    skill=(),
-    spell=(),
-    level=(),
-    event=(),
-    explore=(),
+    skill=auto(),
+    spell=auto(),
+    level=auto(),
+    event=auto(),
+    explore=auto(),
 
 class PointMode(IEnum):
     """
         单独坐标点枚举
     """
     #护盾
-    graze=(),
+    graze=auto(),
     #展开技能详情
-    skill_open=(),
-    confirm=(),
+    skill_open=auto(),
+    confirm=auto(),
     #技能详情收起skill_shrink->skill_expanded
-    skill_expanded=(),
+    skill_expanded=auto(),
     #展开符卡详情
-    spell_open=(),
+    spell_open=auto(),
     #使用P点
-    pboost=(),
+    pboost=auto(),
     
-    level=(),
-    spell=(),
-    swipe=(),
-    event=(),
+    level=auto(),
+    spell=auto(),
+    swipe=auto(),
+    event=auto(),
     #切换队伍
-    group=(),
-    skill=(),
+    group=auto(),
+    skill=auto(),
     #难度变更点
-    difficultychange=(),
+    difficultychange=auto(),
     #进入探索
-    explore=(),
+    explore=auto(),
     #进入远征
-    farseek=(),
+    farseek=auto(),
     #cancel->next
-    next=(),
+    next=auto(),
     #重新战斗
-    rebattle=(),
+    rebattle=auto(),
     #战斗结算
-    battle_success=(),
+    battle_success=auto(),
 
 class Skill(IntEnum):
     """

@@ -12,7 +12,8 @@ logger=get_logger(__name__)
 def load_img(fpn):
     try:
         return aircv.imread(fpn)
-    except:
+    except Exception as e:
+        logger.error(f'Load Image Failed({str(e)}),FileTarget is {fpn}')
         return None
 
 def load_scripts(modulepath:str='scripts'):
