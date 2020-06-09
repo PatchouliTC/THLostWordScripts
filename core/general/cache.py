@@ -18,11 +18,6 @@ class TemplateMode(IntEnum):
         templates直接使用此KEY表获取对应图
         example:templates[TemplateMode.spread_shoot]
     """
-    #难度
-    normal=auto(),
-    hard=auto(),
-    lunatic=auto(),
-
     #战斗定义---
     #扩散平A
     spread_shoot=auto(),
@@ -136,14 +131,14 @@ class Spell(IntEnum):
     C=2,
     D=3,
     LW=4
-#新增difficulty
+    
 class Difficulty(IntEnum):
     """
         难度
     """
-    normal=0,
-    hard=1,
-    Lunatic=2
+    normal=1110,
+    hard=1111,
+    lunatic=1112
 
 class Level(IntEnum):
     """
@@ -224,9 +219,9 @@ templates={
 
     TemplateMode.back:Template(image=li(r"back.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(-0.471, -0.255), resolution=(1280, 720)),
     
-    TemplateMode.normal:Template(image=li(r"normal.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(-0.162, 0.223), resolution=(1280, 720)),
-    TemplateMode.hard:Template(image=li(r"hard.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(-0.164, 0.224), resolution=(1280, 720)),
-    TemplateMode.lunatic:Template(image=li(r"lunatic.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(-0.16, 0.223), resolution=(1280, 720)),
+    Difficulty.normal:Template(image=li(r"normal.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(-0.162, 0.223), resolution=(1280, 720)),
+    Difficulty.hard:Template(image=li(r"hard.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(-0.164, 0.224), resolution=(1280, 720)),
+    Difficulty.lunatic:Template(image=li(r"lunatic.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(-0.16, 0.223), resolution=(1280, 720)),
 
     #cancel->next
     TemplateMode.next:Template(image=li(r"next.png"), target_pos=TargetPos.RANDOMINLINE,record_pos=(0.419, 0.168), resolution=(1280, 720)),

@@ -6,12 +6,14 @@
         "**/__pycache__": true,
         "**/*.pyc": true,
         "env": true,
-        "**/*.pyproj":true
+        "**/*.pyproj":true,
+        ".gitignore":true
     },
     "files.exclude": {
         "**/__pycache__": true,
         "**/*.pyc": true,
         "env": true,
-        "**/*.pyproj":true
+        "**/*.pyproj":true,
+        ".gitignore":true
     }
 }
