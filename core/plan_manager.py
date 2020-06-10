@@ -52,19 +52,19 @@ class planmanager(object):
                         self.run_time_plan()
                         logger.debug(f"尝试执行任务:{p['script'].ScriptName}(第{t}次)")
                         try:
-                            if not p['Script'].should_run():
+                            if not p['script'].should_run():
                                 logger.info(f"{p['script'].ScriptName}提前终止(已运行总数:{t-1})")
                                 break
                             #上一次执行的脚本为空，直接保存当前脚本并start
                             if not self.lastrunplan:
-                                self.lastrunplan=p['Script']
-                                p['Script'].start()
+                                self.lastrunplan=p['script']
+                                p['script'].start()
                             else:
                                 #如果之前脚本不是当前脚本，调用之前脚本的结束方法并调用当前脚本的启动方法,之后保存当前执行脚本
-                                if self.lastrunplan.ScriptName!=p['Script'].ScriptName:
+                                if self.lastrunplan.ScriptName!=p['script'].ScriptName:
                                     self.lastrunplan.finish()
-                                    p['Script'].start()
-                                    self.lastrunplan=p['Script']
+                                    p['script'].start()
+                                    self.lastrunplan=p['script']
                             #执行当前脚本循环方法
                             p['script'].run()
                         except Exception as e:
