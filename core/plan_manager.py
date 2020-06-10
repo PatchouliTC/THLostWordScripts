@@ -50,7 +50,7 @@ class planmanager(object):
                     for t in range(p['times']):
                         #check need run timeplan
                         self.run_time_plan()
-                        logger.debug(f"尝试执行任务:{p['script'].ScriptName}(第{t}次)")
+                        logger.info(f"尝试执行任务:{p['script'].ScriptName}(第{t}次)")
                         try:
                             if not p['script'].should_run():
                                 logger.info(f"{p['script'].ScriptName}提前终止(已运行总数:{t-1})")
@@ -88,7 +88,7 @@ class planmanager(object):
     def run_time_plan(self):
         while not self.time_plan.empty():
             tp=self.time_plan.get(timeout=1)
-            logger.info(f'尝试执行{tp.ScriptName}')
+            logger.info(f'尝试执行定时任务{tp.ScriptName}')
             try:
                 if not tp.should_run():
                     logger.info(f"{tp.ScriptName}提前终止")
