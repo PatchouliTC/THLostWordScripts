@@ -1,5 +1,5 @@
 # -*- encoding=utf8 -*-
-from enum import IntEnum, Enum, auto
+from enum import IntEnum,auto
 from core.general import load_img as li
 from core.setting import Settings as CST
 
@@ -14,14 +14,26 @@ ST.FIND_TIMEOUT_TMP=2
 
 class IEnum(IntEnum):
     """
-        自增IntEnum
-        X=()
+        自增IntEnum+避免重复值
+        X=auto()
     """
-    def __new__(cls):
-        value = len(cls.__members__)  # note no + 1
-        obj = int.__new__(cls)
-        obj._value_ = value
-        return obj
+    def __init__(self, *args):
+        cls = self.__class__
+        if any(self.value == e.value for e in cls):
+            a = self.name
+            e = cls(self.value).name
+            raise ValueError(f"{cls.__name__}存在值相等情况:{a}->{e}")
+    
+    #从0开始自增
+    def _generate_next_value_(name, start, count, last_values):
+        for last_value in reversed(last_values):
+            try:
+                return last_value + 1
+            except TypeError:
+                pass
+        else:
+            #I need start with 0
+            return 0
 
 class TemplateMode(Enum):
     """
@@ -86,7 +98,7 @@ class TemplateMode(Enum):
     #准备房间出发按钮
     startbattle=auto(),
 
-class OffsetMode(Enum):
+class OffsetMode(IEnum):
     skill=auto(),
     spell=auto(),
     level=auto(),

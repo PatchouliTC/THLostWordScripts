@@ -50,7 +50,7 @@ class planmanager(object):
                     for t in range(p['times']):
                         #check need run timeplan
                         self.run_time_plan()
-                        logger.debug(f"尝试执行任务:{p['script'].ScriptName}(第{t}次)")
+                        logger.info(f"尝试执行任务:{p['script'].ScriptName}(第{t}次)")
                         try:
                             if not p['script'].should_run():
                                 logger.info(f"{p['script'].ScriptName}提前终止(已运行总数:{t-1})")
@@ -70,7 +70,11 @@ class planmanager(object):
                         except Exception as e:
                             logger.error(f"在第{t}次执行{p['script'].ScriptName}脚本时发生错误({str(e)})")
         #所有循环任务和主题大循环次数均运行完毕，查看时间任务，如果还有时间任务未完成，
-        logger.info(f"所有循环任务执行完毕，侦测定时任务>>>>>>")
+        logger.info(f"所有循环任务执行完毕,侦测定时任务>>>>>>")
+        if len(self.scheduler.get_jobs())<=0:
+            logger.info('未侦测到定时任务,结束运行')
+            return
+        logger.info('存在未结束的定时任务,等待定时任务执行完毕...')
         while len(self.scheduler.get_jobs())>0:
             logger.debug(f"{len(self.scheduler.get_jobs())} plans left")
             tp=self.time_plan.get()
@@ -84,7 +88,7 @@ class planmanager(object):
     def run_time_plan(self):
         while not self.time_plan.empty():
             tp=self.time_plan.get(timeout=1)
-            logger.info(f'尝试执行{tp.ScriptName}')
+            logger.info(f'尝试执行定时任务{tp.ScriptName}')
             try:
                 if not tp.should_run():
                     logger.info(f"{tp.ScriptName}提前终止")
@@ -105,9 +109,15 @@ class planmanager(object):
 
 
     def clear_time_jobs(self):
-        self.scheduler.remove_all_jobs()
-        self.time_plan.queue.clear()
-        logger.info('清理完毕所有时间任务队列信息')
+        didclearop=False
+        if len(self.scheduler.get_jobs())>0:
+            self.scheduler.remove_all_jobs()
+            didclearop=True
+        if not self.time_plan.empty():
+            self.time_plan.queue.clear()
+            didclearop=True
+        if didclearop:
+            logger.info('时间任务 队列已清空')
 
     def remove_time_job(self,name:str):
         try:
