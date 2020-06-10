@@ -32,6 +32,7 @@ class Battle(ScriptBase):
         self.first_time = True
         self.change_group = True
         self.in_battle = False
+        self.end_battle = False
         self.enter_fail = 0
         self.end_fail = 0
 
@@ -43,13 +44,14 @@ class Battle(ScriptBase):
         self.in_battle = False
         if util.GoHome():
             util.GoExplore()
+            sleep(2)
             self.InitSelectLevel()
             self.first_time = False
         else:
             self.Logger.error(f'{self.ScriptName} 返回主页面失败')
 
     def run(self):
-        print(f'{self.ScriptName} 脚本真实循环执行的逻辑...')
+        #print(f'{self.ScriptName} 脚本真实循环执行的逻辑...')
         #self.Logger.info('sample1 run')
         self.start_record()
         self.fail = False
@@ -77,9 +79,11 @@ class Battle(ScriptBase):
         '''初始化选择章节方法'''
         try:
             util.SelectExplore(1)
+            sleep(1)
             util.SelectExplore(0)
+            sleep(1)
             util.SelectEvent(3)
-            util.SelectDifficulty(2)
+            util.SelectDifficulty(Difficulty.lunatic)
             sleep(1)
             touch(self.event)
             sleep(1)
@@ -162,17 +166,17 @@ class Battle(ScriptBase):
         :return: 战斗结束True
         '''
         #判断结算图
-        if not exists(T[TM.battle_success]):
+        if not self.end_battle and not exists(T[TM.battle_success]):
             if self.end_fail >= self.max_end_fail:
                 self.end_fail = 0
                 if util.auto_timeout():
                     return False
                 if exists(T[TM.battle_fail]):
                     self.fail = True
-                    return True
+                    self.end_battle = True
                 else:
                     util.auto_retry()
-                    return True
+                    self.end_battle = True
             if not util.WaitStatic(max_time=1, timeout=3):
                 self.end_fail += 1
             else:

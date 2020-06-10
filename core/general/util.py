@@ -50,7 +50,7 @@ def use_skill(*args:Skill):
         touch(P[PM.skill_open])
         sleep(1)
         for i in args:
-            touch(P[PM.spell][i.value])
+            touch(P[PM.skill][i])
             sleep(0.75)
             touch(P[PM.confirm])
             sleep(0.75)
@@ -72,7 +72,7 @@ def use_spell(s:Spell):
         touch(P[PM.spell_open])
         #wait(Template(r"tpl1588559730239.png", record_pos=(-0.448, 0.088), resolution=(1280, 720)), 5)
         sleep(1.5)
-        touch(P[PM.spell][s.value])
+        touch(P[PM.spell][s])
     except TargetNotFoundError:
         logger.error("use_spell fail, spell: " + str(s))
 
@@ -121,7 +121,7 @@ def select_level(level:Level):
         example->select_level(Level.M1)
     """
     try:
-        touch(P[PM.level][level.value])
+        touch(P[PM.level][level])
         return True
     except:
         return False
@@ -135,6 +135,8 @@ def AtHome():
 def GoHome():
     """返回主界面"""
     auto_timeout()
+    if AtHome():
+        return True
     #有回家按钮直接点
     if exists(T[TM.home]):
         touch(T[TM.home])
@@ -164,7 +166,7 @@ def SelectExplore(e:Explore):
         选择战斗类别
         example-> SelectExplore(Explore.A)
     """
-    touch(P[PM.explore][e.value])
+    touch(P[PM.explore][e])
     sleep(0.5)
 
 def GoFarSeek():
@@ -203,7 +205,7 @@ def SelectEvent(event:Event):
         切换章节
         example:SelectEvent(Event.Story1)
     '''
-    touch(P[PM.event][event.value])
+    touch(P[PM.event][event])
     sleep(0.5)
 
 def SelectDifficulty(d:Difficulty):
@@ -214,7 +216,7 @@ def SelectDifficulty(d:Difficulty):
     if d in [Difficulty.normal,Difficulty.hard,Difficulty.lunatic]:
         #pos = PointSet([427, 652], src_resolution)
         for i in range(3):
-            if not exists(T[d.value]):
+            if not exists(T[d]):
                 touch(P[PM.difficultychange])
                 sleep(1)
             else:
