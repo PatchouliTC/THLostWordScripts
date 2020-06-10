@@ -1,18 +1,12 @@
 {
-    "device":"",
+    "device":"Android://127.0.0.1:5037/192.168.3.222:12450",
     "cycle_times":1,
     "plan":[
         {
-            "enable":false,
-            "script":"sample1",
+            "enable":true,
+            "script":"battle",
             "times":15,
             "interval":-1
-        },
-        {
-            "enable":false,
-            "script":"sample2",
-            "times":10,
-            "interval":30
         }
     ]
 }

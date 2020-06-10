@@ -35,7 +35,7 @@ class IEnum(IntEnum):
             #I need start with 0
             return 0
 
-class TemplateMode(IEnum):
+class TemplateMode(Enum):
     """
         特征图枚举
         templates直接使用此KEY表获取对应图
@@ -105,7 +105,7 @@ class OffsetMode(IEnum):
     event=auto(),
     explore=auto(),
 
-class PointMode(IEnum):
+class PointMode(Enum):
     """
         单独坐标点枚举
     """
