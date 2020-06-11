@@ -23,7 +23,6 @@ class IEnum(IntEnum):
             a = self.name
             e = cls(self.value).name
             raise ValueError(f"{cls.__name__}存在值相等情况:{a}->{e}")
-    
     #从0开始自增
     def _generate_next_value_(name, start, count, last_values):
         for last_value in reversed(last_values):
@@ -35,7 +34,7 @@ class IEnum(IntEnum):
             #I need start with 0
             return 0
 
-class TemplateMode(Enum):
+class TemplateMode(IEnum):
     """
         特征图枚举
         templates直接使用此KEY表获取对应图
@@ -43,105 +42,105 @@ class TemplateMode(Enum):
     """
     #战斗定义---
     #扩散平A
-    spread_shoot=auto(),
+    spread_shoot=auto()
     #集中平A
-    focus_shoot=auto(),
+    focus_shoot=auto()
 
     #信息框标题
-    msg_box_title=auto(),
+    msg_box_title=auto()
     #信息框确定按钮
-    msg_box_confirm=auto(),
+    msg_box_confirm=auto()
     #信息框失败时返回按钮
-    msg_box_fail=auto(),
+    msg_box_fail=auto()
     #信息框确定按钮-无边框
-    msg_box_confirm_noborder=auto(),
+    msg_box_confirm_noborder=auto()
 
     #战斗失败标记
-    battle_fail=auto(),
+    battle_fail=auto()
     #战斗胜利标记
-    battle_success=auto(),
+    battle_success=auto()
     #删除了旧版的结算确定按键
     #使用符卡页面展开
-    spell_expanded=auto(),
+    spell_expanded=auto()
     #使用技能页面展开
-    skill_expanded=auto(),
+    skill_expanded=auto()
     #战斗中菜单按钮
-    battle_menu=auto(),
+    battle_menu=auto()
     #退出战斗
-    quit_battle=auto(),
+    quit_battle=auto()
     #退出确认按钮
-    quit_confirm=auto(),
+    quit_confirm=auto()
     #主页面探索按钮
-    explore=auto(),
+    explore=auto()
     #返回主页面按钮
-    home=auto(),
+    home=auto()
     #远征标记
-    farseek=auto(),
+    farseek=auto()
     #临时远征标记
-    farseek_temp=auto(),
+    farseek_temp=auto()
 
     #P-BOOST标记-用于判断战斗界面UI移动是否结束
-    p=auto(),
+    p=auto()
     #符卡
-    spell_card=auto(),
+    spell_card=auto()
     #结界
-    graze=auto(),
+    graze=auto()
     #技能
-    skill=auto(),
+    skill=auto()
 
     #返回按钮
-    back=auto(),
+    back=auto()
     #cancel->next
-    next=auto(),
+    next=auto()
     #战斗结束重新战斗按钮
-    rebattle=auto(),
+    rebattle=auto()
     #准备房间出发按钮
-    startbattle=auto(),
+    startbattle=auto()
 
 class OffsetMode(IEnum):
-    skill=auto(),
-    spell=auto(),
-    level=auto(),
-    event=auto(),
-    explore=auto(),
+    skill=auto()
+    spell=auto()
+    level=auto()
+    event=auto()
+    explore=auto()
 
-class PointMode(Enum):
+class PointMode(IEnum):
     """
         单独坐标点枚举
     """
     #护盾
-    graze=auto(),
+    graze=auto()
     #展开技能详情
-    skill_open=auto(),
-    confirm=auto(),
+    skill_open=auto()
+    confirm=auto()
     #技能详情收起skill_shrink->skill_expanded
-    skill_expanded=auto(),
+    skill_expanded=auto()
     #展开符卡详情
-    spell_open=auto(),
+    spell_open=auto()
     #使用P点
-    pboost=auto(),
+    pboost=auto()
     
-    level=auto(),
-    spell=auto(),
-    swipe=auto(),
-    event=auto(),
+    level=auto()
+    spell=auto()
+    swipe=auto()
+    event=auto()
     #切换队伍
-    group=auto(),
-    skill=auto(),
+    group=auto()
+    skill=auto()
     #难度变更点
-    difficultychange=auto(),
+    difficultychange=auto()
     #进入探索
-    explore=auto(),
+    explore=auto()
     #进入远征
-    farseek=auto(),
+    farseek=auto()
     #cancel->next
-    next=auto(),
+    next=auto()
     #重新战斗
-    rebattle=auto(),
+    rebattle=auto()
     #战斗结算
-    battle_success=auto(),
+    battle_success=auto()
 
-class Skill(IntEnum):
+class Skill(IEnum):
     """
         技能
     """
@@ -149,7 +148,7 @@ class Skill(IntEnum):
     B=1,
     C=2
 
-class Spell(IntEnum):
+class Spell(IEnum):
     """
         符卡
     """
@@ -159,7 +158,7 @@ class Spell(IntEnum):
     D=3,
     LW=4
     
-class Difficulty(IntEnum):
+class Difficulty(IEnum):
     """
         难度
     """
@@ -167,7 +166,7 @@ class Difficulty(IntEnum):
     hard=1111,
     lunatic=1112
 
-class Level(IntEnum):
+class Level(IEnum):
     """
         关卡
     """
@@ -175,7 +174,7 @@ class Level(IntEnum):
     M2=1,
     M3=2
 
-class Event(IntEnum):
+class Event(IEnum):
     """
         章节
     """
@@ -184,14 +183,14 @@ class Event(IntEnum):
     Story3=2,
     Story4=3
 
-class Group(IntEnum):
+class Group(IEnum):
     """
         队伍左右切换
     """
     last=0,
     next=1
 
-class Explore(IntEnum):
+class Explore(IEnum):
     A=0,
     B=1,
     C=2

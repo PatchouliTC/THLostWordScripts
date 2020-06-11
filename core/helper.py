@@ -53,7 +53,7 @@ def make_plan(scripts:dict=load_scripts(),planpath:str='plan.json'):
     cycletime=plans['cycle_times'] if plans['cycle_times'] is not None else 0
 
     planqueue=[]
-    logger.info(f"Finding {len(plans['plan'])} plans...")
+    logger.info(f"读取到 {len(plans['plan'])} 个计划...")
     for plan in plans['plan']:
         if plan['enable'] and plan['script'] in scripts:
 
