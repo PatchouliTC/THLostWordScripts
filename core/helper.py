@@ -90,8 +90,7 @@ def grant_adb_permission(device):
 
     To grant the executable permission to AirTest ADB in Darwin or Linux (included Linux ARM).
 
-    Args:
-        device: Android device object
+    :param device: Android device object
     """
 
     if device is not None:
