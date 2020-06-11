@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 from core.script_base import ScriptBase
 from . import load_img as li,RESAULTPATH

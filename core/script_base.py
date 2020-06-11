@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 from core.logger import get_script_logger,logging,ROOT
 import core.shot_record as Record

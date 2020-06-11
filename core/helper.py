@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import inspect
 from importlib import import_module

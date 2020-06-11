@@ -1,4 +1,5 @@
-# -*- encoding=utf8 -*-
+# -*- coding: utf-8 -*-
+
 from .cache import templates as T,points as P,TemplateMode as TM,PointMode as PM
 
 from .cache import Skill,Spell,Level,Event,Group,Explore,Difficulty

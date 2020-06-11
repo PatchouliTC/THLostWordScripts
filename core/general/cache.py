@@ -1,4 +1,5 @@
-# -*- encoding=utf8 -*-
+# -*- coding: utf-8 -*-
+
 from enum import IntEnum,auto
 from core.general import load_img as li
 from core.setting import Settings as CST
