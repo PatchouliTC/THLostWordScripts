@@ -1,30 +1,29 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
 import logging
-from apscheduler.schedulers.background import BackgroundScheduler
+import sys
 
-from six.moves.urllib.parse import parse_qsl, urlparse
-from airtest.utils.logger import set_root_logger_level
 from airtest.core.android.adb import ADB
 from airtest.core.api import connect_device
+from airtest.utils.logger import set_root_logger_level
+
+from core.helper import make_plan, grant_adb_permission
+from core.logger import init_logging
+from core.plan_manager import planmanager as pm
 
 set_root_logger_level(logging.INFO)
 
-from core.helper import make_plan
-from core.plan_manager import planmanager as pm
-from core.logger import init_logging
-
-logger=init_logging(level=logging.INFO)
+logger = init_logging(level=logging.INFO)
 
 if __name__ == "__main__":
 
-    device,cycletime,plans=make_plan()
-    
-    planmanager=pm()
+    device, cycletime, plans = make_plan()
 
-    if not planmanager.set_plan(plans,cycletime):
+    grant_adb_permission(device)
+
+    planmanager = pm()
+
+    if not planmanager.set_plan(plans, cycletime):
         logger.info('无计划任务，直接终止')
         sys.exit(0)
 
@@ -40,18 +39,18 @@ if __name__ == "__main__":
             sys.exit(0)
         print(f'可用设备列表---》》》')
         for d in range(len(devices)):
-            print(f"{d+1}.{devices[d][0]}")
-        num=int(input('输入希望链接的设备编码[1,2,3,4...]:'))
+            print(f"{d + 1}.{devices[d][0]}")
+        num = int(input('输入希望链接的设备编码[1,2,3,4...]:'))
         try:
-            device=devices[num-1][0]
+            device = devices[num - 1][0]
         except:
             logger.info('非法输入,选择第一个设备作为可用设备')
-            device=devices[0][0]
+            device = devices[0][0]
 
-        instance=connect_device(f'android:///{device}')
+        instance = connect_device(f'android:///{device}')
     else:
         logger.info(f"尝试链接设备[{device}]")
-        instance=connect_device(device)
+        instance = connect_device(device)
     if instance:
         logger.info(f"连接成功，开始执行计划任务")
         planmanager.run_plans()
@@ -59,11 +58,3 @@ if __name__ == "__main__":
         logger.error('连接失败')
     logger.info('计划执行结束')
     ADB().kill_server()
-
-
-    
-
-
-
-
-
