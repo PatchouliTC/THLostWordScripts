@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ###
 ###
 ###  Store All Script in here

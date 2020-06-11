@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from .general.util import *
 from airtest.core.cv import Template,PointSet
 

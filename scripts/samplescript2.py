@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from core.script_base import ScriptBase
 from . import load_img as li,TEMPLATEPATH,RESAULTPATH
 from core.general import util
