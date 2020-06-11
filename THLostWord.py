@@ -9,7 +9,6 @@ from cli.runner import setup,generate_device_url
 
 if __name__ == "__main__":
 
-
     ap = get_parser()
     args = ap.parse_args(sys.argv[1:])
 
@@ -18,4 +17,6 @@ if __name__ == "__main__":
         sys.exit(0)
     elif args.action == 'gd':
         generate_device_url(args)
+    else:
+        ap.print_help()
 
