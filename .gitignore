@@ -1,8 +1,10 @@
 *.zip
+plan.json
 env
 __pycache__
 *.pyproj
 *.pyc
 /scripts/script_resault/*
+
 .idea/
 *.iml

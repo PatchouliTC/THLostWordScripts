@@ -15,7 +15,7 @@
         "**/*.pyc": true,
         "env": true,
         "**/*.pyproj":true,
-        ".gitignore":true,
+        ".gitignore":false,
         "custom_airtest":true
     }
 }
