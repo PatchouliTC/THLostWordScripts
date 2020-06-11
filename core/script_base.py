@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from core.logger import get_script_logger,logging,ROOT
+from core.logger import get_script_logger,logging
 import core.shot_record as Record
 
 class ScriptBase(object):
@@ -25,7 +25,7 @@ class ScriptBase(object):
         if base:
             self.RESAULTPATH=self.get_path(base)
         else:
-            self.RESAULTPATH=ROOT
+            self.RESAULTPATH=os.getcwd()
         self.Logger=get_script_logger(module,os.path.join(self.RESAULTPATH,'result.log'),level)
         if self.ENABLERECORD:
             self.record=Record.Record(self.RESAULTPATH,self.Logger)

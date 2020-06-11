@@ -55,8 +55,8 @@ class PlanType(IntEnum):
 def make_plan(scripts=None, planpath: str = 'plan.json'):
     """
         装载并制定执行计划
-        scripts:可用脚本库
-        planpath:任务json文件
+        :param scripts:可用脚本库
+        :param planpath:任务json文件
     """
     if scripts is None:
         scripts = load_scripts()

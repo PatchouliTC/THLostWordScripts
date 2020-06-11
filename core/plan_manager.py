@@ -10,14 +10,18 @@ logger=get_logger(__name__)
 
 class planmanager(object):
     def __init__(self):
-        self.plans=dict(),
+        self.plans=list()
         self.cycletime=0
         self.lastrunplan=None
         self.time_plan=Queue()
         self.scheduler=BackgroundScheduler()
         self.scheduler.start()
 
-    def set_plan(self,plans:dict=dict(),cycletime:int=0):
+    def set_plan(self,plans:list,cycletime:int=0):
+        if plans is None:
+            logger.error('计划单不能为None')
+            return False
+
         #clear old timeplans
         self.clear_time_jobs()
 

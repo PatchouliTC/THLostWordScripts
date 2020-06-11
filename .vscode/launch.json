@@ -5,10 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "THLostWord",
+            "name": "THLW Debug Mode",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/THLostWord.py",
+            "args": [
+                "run",
+                "-d"
+            ]
+        },
+        {
+            "name": "THLW Release Mode",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/THLostWord.py",
+            "args": [
+                "run",
+            ]
+        },
+        {
+            "name": "THLW Gen Device",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/THLostWord.py",
+            "args": [
+                "gd",
+                "droid",
+                "-s 111"
+            ]
         },
         {
             "name": "Python: 当前文件",

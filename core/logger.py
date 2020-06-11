@@ -2,10 +2,9 @@
 
 import os
 import logging
+from .setting import Settings as ST
 
-ROOT='TH_LW'
-
-def init_logging(logname:str=ROOT,level:int=logging.DEBUG,filepath:str=None):
+def init_logging(logname:str=ST.ROOT,level:int=ST.LOG_LEVEL,filepath:str=None):
     # logger = logging.root
     # use 'airtest' as root logger name to prevent changing other modules' logger
     logger = logging.getLogger(logname)
@@ -21,20 +20,23 @@ def init_logging(logname:str=ROOT,level:int=logging.DEBUG,filepath:str=None):
         fhandler=logging.FileHandler(filename=filepath,encoding='utf-8')
         fhandler.setFormatter(formatter)
         logger.addHandler(fhandler)
+    
+
     return logger
 
-def set_logger_level(logname:str=ROOT,level:int=logging.DEBUG):
+
+def set_logger_level(logname:str=ST.ROOT,level:int=logging.DEBUG):
     logging.getLogger(logname).setLevel(level)
 
 
-def get_logger(name:str=ROOT):
+def get_logger(name:str=ST.ROOT):
     logger = logging.getLogger(name)
     return logger
 
 
-def get_script_logger(name:str=None,filepath:str=None,level:int=logging.INFO):
+def get_script_logger(name:str=None,filepath:str=None,level:int=ST.LOG_LEVEL):
     if name is None:
-        log=logging.getLogger(ROOT)
+        log=logging.getLogger(ST.ROOT)
     else:
         log=logging.getLogger(name)
 
