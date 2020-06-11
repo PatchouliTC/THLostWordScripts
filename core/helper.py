@@ -9,6 +9,7 @@ from enum import IntEnum
 from importlib import import_module
 
 from airtest import aircv
+from airtest.core.android.adb import ADB
 
 from .logger import get_logger
 from .script_base import ScriptBase
@@ -86,38 +87,24 @@ def make_plan(scripts=None, planpath: str = 'plan.json'):
 
 
 def grant_adb_permission(device):
-    """Grant permission to AirTest ADB
+    """给AirTest ADB赋予权限
 
-    To grant the executable permission to AirTest ADB in Darwin or Linux (included Linux ARM).
+    为Darwin (macOS)和Linux，以及Linux ARM系统下的AirTest ADB赋予可执行权限.
 
-    :param device: Android device object
+    :param device: Android设备对象
     """
 
     if device is not None:
-        logger.info('Device detected, handling adb permission...')
-        # Import AirTest module as a object
-        import airtest as _airtest_module
+        logger.info('检测到已接入的设备，正在处理AirTest ADB权限...')
 
-        # Get current Operating System platform
-        os_platform = platform.system()
-        logger.info(f'Operating System platform: {os_platform}')
+        # 获取当前操作系统的平台名称
+        system = platform.system()
+        logger.info(f'当前操作系统: {system}')
 
-        # Get AirTest module path from imported object `_airtest_module`
-        airtest_path = os.path.dirname(_airtest_module.__file__)
-        logger.debug(f'AirTest module path: {airtest_path}')
+        # 通过AirTest的ADB静态方法获取ADB路径
+        adb_path = ADB.builtin_adb_path()
+        logger.info(f'AirTest ADB路径: {adb_path}')
 
-        if os_platform == 'Darwin':
-            # if current OS is macOS, grant the permission to AirTest macOS ADB
-            adb_path = f'{airtest_path}/core/android/static/adb/mac/adb'
-            logger.info(f'AirTest ADB path: {adb_path}')
-
+        if system == 'Darwin' or system == 'Linux':
+            # if current OS is macOS, Linux or Linux Arm, grant the permission to AirTest ADB
             subprocess.call(['chmod', '+x', adb_path])
-        elif os_platform == 'Linux':
-            # if current OS is Linux/Linux Arm, grant the permission to AirTest Linux ADB and Airtest Linux ARM ADB
-            adb_path = f'{airtest_path}/core/android/static/adb/linux/adb'
-            logger.info(f'AirTest ADB path: {adb_path}')
-            adb_for_arm_path = f'{airtest_path}/core/android/static/adb/linux_arm/adb'
-            logger.info(f'AirTest ADB path: {adb_for_arm_path}')
-
-            subprocess.call(['chmod', '+x', adb_path])
-            subprocess.call(['chmod', '+x', adb_for_arm_path])
