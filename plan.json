@@ -1,17 +1,23 @@
 {
-    "device":"",
-    "cycle_times":1,
+    "device":"Android://127.0.0.1:5037/192.168.3.222:12450",
+    "cycle_times":65535,
     "plan":[
         {
-            "enable":true,
+            "enable":false,
             "script":"sample1",
             "times":100,
             "interval":180
         },
         {
-            "enable":false,
-            "script":"battle",
-            "times":15,
+            "enable":true,
+            "script":"remilia_L234",
+            "times":10,
+            "interval":-1
+        },
+        {
+            "enable":true,
+            "script":"ran_L236",
+            "times":10,
             "interval":-1
         }
     ]

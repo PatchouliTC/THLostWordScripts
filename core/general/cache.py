@@ -104,6 +104,7 @@ class OffsetMode(IEnum):
     level=auto()
     event=auto()
     explore=auto()
+    chapter=auto()
 
 class PointMode(IEnum):
     """
@@ -125,6 +126,7 @@ class PointMode(IEnum):
     spell=auto()
     swipe=auto()
     event=auto()
+    chapter=auto()
     #切换队伍
     group=auto()
     skill=auto()
@@ -184,6 +186,14 @@ class Event(IEnum):
     Story3=2,
     Story4=3
 
+class Chapter(IEnum):
+    """
+        第x节
+    """
+    C1=0,
+    C2=1,
+    C3=2
+
 class Group(IEnum):
     """
         队伍左右切换
@@ -201,6 +211,7 @@ cuntom_offsets={
     OffsetMode.spell:[[230, 407], [416, 328], [614, 266], [805, 225], [1007, 207]],
     OffsetMode.level:[[876, 506], [876, 354], [876, 206]],
     OffsetMode.event:[[885, 546], [870, 392], [863, 250], [886, 144]],
+    OffsetMode.chapter:[[876, 506], [876, 354], [876, 206]],
     OffsetMode.explore:[[669, 652], [895, 649], [1111, 655]],
 }
 
@@ -286,7 +297,13 @@ points={
 
     PointMode.swipe:[
         PointSet((640, 500), (1280, 720)),#start
-        PointSet((640, 170), (1280, 720)),#end
+        PointSet((640, 175), (1280, 720)),#end
+    ],
+
+    PointMode.chapter:[
+        PointSet(cuntom_offsets[OffsetMode.chapter][0], (1280, 720), 10),
+        PointSet(cuntom_offsets[OffsetMode.chapter][1], (1280, 720), 10),
+        PointSet(cuntom_offsets[OffsetMode.chapter][2], (1280, 720), 10),
     ],
 
     PointMode.event:[
