@@ -10,8 +10,14 @@
         },
         {
             "enable":true,
-            "script":"battle_L154",
-            "times":50,
+            "script":"remilia_L234",
+            "times":10,
+            "interval":-1
+        },
+        {
+            "enable":true,
+            "script":"ran_L236",
+            "times":10,
             "interval":-1
         }
     ]

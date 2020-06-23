@@ -2,7 +2,7 @@
 
 from .cache import templates as T,points as P,TemplateMode as TM,PointMode as PM
 
-from .cache import Skill,Spell,Level,Event,Group,Explore,Difficulty
+from .cache import Skill,Spell,Level,Event,Group,Explore,Difficulty,Chapter
 
 from airtest.core.api import touch,wait,exists,sleep,wait_until_stable,swipe
 from airtest.core.cv import TargetNotFoundError
@@ -142,18 +142,18 @@ def GoHome():
     if exists(T[TM.home]):
         touch(T[TM.home])
         sleep(3)
-    #如果在战斗中退出战斗之后点
-    elif exists(T[TM.battle_menu]):
-        if exit():
-            sleep(3)
-            touch(T[TM.home])
-            sleep(3)
-    #另一种特殊情况
+    #结算页面的情况
     elif exists(T[TM.next]):
         touch(P[PM.next])
         sleep(3)
         touch(T[TM.home])
         sleep(3)
+    #如果在战斗中退出战斗之后回主页
+    elif exists(T[TM.battle_menu]):
+        if exit():
+            sleep(3)
+            touch(T[TM.home])
+            sleep(3)
     
     return AtHome()
 
@@ -181,9 +181,9 @@ def GoFarSeek():
 def SwipeLevel(up:bool=True):
     """滑动当前关卡总览"""
     if up:
-        swipe(P[PM.swipe][1], P[PM.swipe][0], duration=1, steps=20)
+        swipe(P[PM.swipe][1], P[PM.swipe][0], duration=1, steps=1000)
     else:
-        swipe(P[PM.swipe][0], P[PM.swipe][1], duration=1, steps=20)
+        swipe(P[PM.swipe][0], P[PM.swipe][1], duration=1, steps=1000)
 
 def WaitStatic(picture=T[TM.p], max_time=5, timeout=5):
     """
@@ -207,6 +207,14 @@ def SelectEvent(event:Event):
         example:SelectEvent(Event.Story1)
     '''
     touch(P[PM.event][event])
+    sleep(0.5)
+
+def SelectChapter(chapter:Chapter):
+    '''
+        选择第x节
+        example:SelectChapter(Chapter.C1)
+    '''
+    touch(P[PM.chapter][chapter])
     sleep(0.5)
 
 def SelectDifficulty(d:Difficulty):
