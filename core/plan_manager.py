@@ -4,7 +4,7 @@ import os
 from queue import Queue
 from apscheduler.schedulers.background import BackgroundScheduler
 from core.helper import make_plan,PlanType
-from core.logger import get_logger
+from core.logger import get_logger,ST
 
 logger=get_logger(__name__)
 
@@ -76,6 +76,8 @@ class planmanager(object):
                         except Exception as e:
                             logger.error(f"在第{t}次执行{p['script'].ScriptName}脚本时发生错误({str(e)})")
         #所有循环任务和主题大循环次数均运行完毕，查看时间任务，如果还有时间任务未完成，
+        if ST.MANUAL_CANCEL:
+            return
         logger.info(f"所有循环任务执行完毕,侦测定时任务>>>>>>")
         if len(self.scheduler.get_jobs())<=0:
             logger.info('未侦测到定时任务,结束运行')
@@ -89,6 +91,8 @@ class planmanager(object):
                 tp.run()
             except Exception as e:
                 logger.error(f"任务{tp['script'].ScriptName}执行中发生异常({str(e)})")
+        if self.lastrunplan:
+            self.lastrunplan.finish()
                 
                 
     def run_time_plan(self):

@@ -71,12 +71,12 @@ def make_plan(scripts=None, planpath: str = 'plan.json'):
     for plan in plans['plan']:
         if plan['enable'] and plan['script'] in scripts:
 
-            if plan['times'] > 0 and (plan['interval'] is None or plan['interval'] <= 0):
+            if plan['times'] > 0 and (not plan['interval'] or plan['interval'] <= 0):
                 planqueue.append({'type': PlanType.normal,
                                   'script': scripts[plan['script']],
                                   'times': plan['times']})
 
-            elif plan['interval'] is not None and plan['interval'] > 0:
+            elif plan['interval'] and plan['interval'] > 0:
                 planqueue.append({'type': PlanType.time,
                                   'script': scripts[plan['script']],
                                   'maxtimes': (

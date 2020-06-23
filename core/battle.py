@@ -32,8 +32,8 @@ class Battle(ScriptBase):
     #event = Template(image=li(os.path.join("event", r"L23.png")), threshold=0.85, record_pos=(0.145, -0.027), resolution=(1280, 720))
     event = None
     
-    def __init__(self, base=None):
-        super().__init__(base=base, module = __name__)
+    def __init__(self, base,module=__name__):
+        super().__init__(base=base, module = module)
         self.first_time = True
         self.change_group = True
         self.in_battle = False
@@ -77,7 +77,7 @@ class Battle(ScriptBase):
         util.GoHome()
 
     def SelectGroup(self):
-        if not Group or not self.SelectGroup:
+        if not self.group or not self.SelectGroup:
             return True
         '''选择队伍方法'''
         return select_group(target=self.group)

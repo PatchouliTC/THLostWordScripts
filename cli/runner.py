@@ -88,7 +88,12 @@ def setup(debugmode:bool=False):
         logger.info(f"连接成功，开始执行计划任务")
         planmanager.run_plans()
         logger.info('计划执行结束')
-        ADB().disconnect()
+        if ST.MANUAL_CANCEL:
+            return True
+        try:
+            ADB().disconnect()
+        except:
+            pass
     else:
         logger.error('连接失败')
 

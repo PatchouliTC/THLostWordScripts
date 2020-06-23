@@ -5,7 +5,7 @@ from . import RESAULTPATH, TEMPLATEPATH
 
 class remilia_L234(Battle):
     ScriptName='event_remu'
-    Description='活动灵梦组'
+    Description='妖梦揍灵梦组'
     ENABLERECORD=False
     #关卡
     LEVEL_NAME = "EL234"
@@ -13,14 +13,14 @@ class remilia_L234(Battle):
     group = None
 
     def __init__(self):
-        super().__init__(base=RESAULTPATH)
+        super().__init__(base=RESAULTPATH,module=__name__)
 
     def InitSelectLevel(self):
         '''初始化选择章节方法'''
         try:
             util.SelectExplore(2)
             sleep(1)
-            Go_level(Difficulty.lunatic)
+            Go_level(difficulty=Difficulty.lunatic,event=Event.Story4)
             sleep(1)
         except TargetNotFoundError as e:
             self.Logger.error(f'{self.ScriptName} InitSelectLevel fail({str(e)})')
@@ -30,7 +30,7 @@ class remilia_L234(Battle):
 
     def SelectLevel(self):
         '''选择关卡'''
-        return util.select_level(Level.M1)
+        return util.select_level(Level.M3)
         #touch(self.level)
 
     def Battle(self):

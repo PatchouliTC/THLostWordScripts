@@ -301,16 +301,16 @@ points={
     ],
 
     PointMode.chapter:[
-        PointSet(cuntom_offsets[OffsetMode.chapter][0], (1280, 720), 10),
-        PointSet(cuntom_offsets[OffsetMode.chapter][1], (1280, 720), 10),
-        PointSet(cuntom_offsets[OffsetMode.chapter][2], (1280, 720), 10),
+        PointSet(cuntom_offsets[OffsetMode.chapter][0], (1280, 720), 3),
+        PointSet(cuntom_offsets[OffsetMode.chapter][1], (1280, 720), 3),
+        PointSet(cuntom_offsets[OffsetMode.chapter][2], (1280, 720), 3),
     ],
 
     PointMode.event:[
-        PointSet(cuntom_offsets[OffsetMode.event][0], (1280, 720), 10),
-        PointSet(cuntom_offsets[OffsetMode.event][1], (1280, 720), 10),
-        PointSet(cuntom_offsets[OffsetMode.event][2], (1280, 720), 10),
-        PointSet(cuntom_offsets[OffsetMode.event][3], (1280, 720), 10),
+        PointSet(cuntom_offsets[OffsetMode.event][0], (1280, 720), 3),
+        PointSet(cuntom_offsets[OffsetMode.event][1], (1280, 720), 3),
+        PointSet(cuntom_offsets[OffsetMode.event][2], (1280, 720), 3),
+        PointSet(cuntom_offsets[OffsetMode.event][3], (1280, 720), 3),
     ],
 
     PointMode.group:[
