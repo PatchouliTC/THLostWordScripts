@@ -103,7 +103,7 @@ def grant_adb_permission(device):
 
         # 通过AirTest的ADB静态方法获取ADB路径
         adb_path = ADB.builtin_adb_path()
-        logger.info(f'AirTest ADB路径: {adb_path}')
+        logger.debug(f'AirTest ADB路径: {adb_path}')
 
         if system == 'Darwin' or system == 'Linux':
             # if current OS is macOS, Linux or Linux Arm, grant the permission to AirTest ADB

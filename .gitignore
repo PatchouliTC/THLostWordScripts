@@ -1,5 +1,4 @@
 *.zip
-plan.json
 env
 __pycache__
 *.pyproj
@@ -8,3 +7,4 @@ __pycache__
 
 .idea/
 *.iml
+plan.json

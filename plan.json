@@ -1,17 +1,17 @@
 {
-    "device":"",
+    "device":"Android://127.0.0.1:5037/emulator-5554",
     "cycle_times":1,
     "plan":[
         {
-            "enable":true,
+            "enable":false,
             "script":"sample1",
             "times":100,
             "interval":180
         },
         {
-            "enable":false,
-            "script":"battle",
-            "times":15,
+            "enable":true,
+            "script":"battle_L154",
+            "times":50,
             "interval":-1
         }
     ]

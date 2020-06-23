@@ -63,12 +63,17 @@ def setup(debugmode:bool=False):
         instance = connect_device(f'android:///{device}')
     else:
         logger.info(f"尝试链接设备[{device}]")
-        instance = connect_device(device)
+        try:
+            instance = connect_device(device)
+        except Exception as e:
+            logger.error(f'连接发生错误({str(e)})')
+            instance=None
     
     if instance:
         logger.info(f"连接成功，开始执行计划任务")
         planmanager.run_plans()
         logger.info('计划执行结束')
+        ADB().disconnect()
     else:
         logger.error('连接失败')
 
