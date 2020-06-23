@@ -9,16 +9,18 @@
             "interval":180
         },
         {
-            "enable":true,
+            "enable":false,
             "script":"remilia_L234",
-            "times":10,
-            "interval":-1
+            "times":10
         },
         {
-            "enable":true,
+            "enable":false,
             "script":"ran_L236",
-            "times":10,
-            "interval":-1
+            "times":10
+        },{
+            "enable":true,
+            "script":"event_remu",
+            "times":2
         }
     ]
 }

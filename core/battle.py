@@ -77,6 +77,8 @@ class Battle(ScriptBase):
         util.GoHome()
 
     def SelectGroup(self):
+        if not Group or not self.SelectGroup:
+            return True
         '''选择队伍方法'''
         return select_group(target=self.group)
     

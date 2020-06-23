@@ -23,13 +23,17 @@ def Go_level(event:Event, chapter:Chapter, difficulty:Difficulty, swipe_times = 
         :param difficulty:难度
         :param swipe_times:滑动次数
     '''
-    SelectEvent(event)
-    SelectDifficulty(difficulty)
-    sleep(1)
-    SelectChapter(chapter)
-    for i in range(swipe_times):
-        SwipeLevel()
-        sleep(2)
+    if event:
+        SelectEvent(event)
+    if difficulty:
+        SelectDifficulty(difficulty) 
+        sleep(1)
+    if chapter:
+        SelectChapter(chapter)
+    if swipe_times>0:
+        for i in range(swipe_times):
+            SwipeLevel()
+            sleep(2)
 
     return True
 
