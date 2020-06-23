@@ -11,16 +11,19 @@
         {
             "enable":false,
             "script":"remilia_L234",
-            "times":10
+            "times":10,
+            "interval":-1
         },
         {
             "enable":false,
             "script":"ran_L236",
-            "times":10
+            "times":10,
+            "interval":-1
         },{
             "enable":true,
             "script":"event_remu",
-            "times":2
+            "times":2,
+            "interval":-1
         }
     ]
 }

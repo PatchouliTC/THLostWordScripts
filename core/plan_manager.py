@@ -50,10 +50,16 @@ class planmanager(object):
 
     def run_plans(self):
         for i in range(self.cycletime):
+            if ST.MANUAL_CANCEL:
+                return
             logger.info(f"第{i+1}次循环---->>>")
             for p in self.plans:
+                if ST.MANUAL_CANCEL:
+                    return
                 if p['type']==PlanType.normal:
                     for t in range(p['times']):
+                        if ST.MANUAL_CANCEL:
+                            return
                         #check need run timeplan
                         self.run_time_plan()
                         logger.info(f"尝试执行任务:{p['script'].ScriptName}(第{t+1}次)")

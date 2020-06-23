@@ -13,4 +13,4 @@ class ran_L236(Battle):
     group = Template(image=li(os.path.join(TEMPLATEPATH, "group", r"ran.png")), threshold=0.85, resolution=(1280, 720))
 
     def __init__(self):
-        super().__init__(base=RESAULTPATH)
+        super().__init__(RESAULTPATH,__name__)

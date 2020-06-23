@@ -202,9 +202,9 @@ class Group(IEnum):
     next=1
 
 class Explore(IEnum):
-    A=0,
-    B=1,
-    C=2
+    Normal=0,
+    Daily=1,
+    Event=2
 
 cuntom_offsets={
     OffsetMode.skill:[[197, 592], [292, 591], [381, 589]],

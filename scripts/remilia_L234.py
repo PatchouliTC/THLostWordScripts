@@ -13,7 +13,7 @@ class remilia_L234(Battle):
     group = Template(image=li(os.path.join(TEMPLATEPATH, "group", r"remilia.png")), threshold=0.85, resolution=(854, 480))
 
     def __init__(self):
-        super().__init__(base=RESAULTPATH)
+        super().__init__(RESAULTPATH,__name__)
 
     def InitSelectLevel(self):
         '''初始化选择章节方法'''

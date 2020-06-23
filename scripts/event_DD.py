@@ -4,8 +4,8 @@ from core.battle import *
 from . import RESAULTPATH, TEMPLATEPATH
 
 class remilia_L234(Battle):
-    ScriptName='event_remu'
-    Description='妖梦揍灵梦组'
+    ScriptName='event_dd'
+    Description='摸你傻揍帝帝组'
     ENABLERECORD=False
     #关卡
     LEVEL_NAME = "EL234"

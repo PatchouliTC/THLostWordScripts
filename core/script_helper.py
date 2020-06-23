@@ -36,3 +36,11 @@ def Go_level(event:Event=None, chapter:Chapter=None, difficulty:Difficulty=None,
             sleep(2)
 
     return True
+
+def Go_level_safe(event:Event=None, chapter:Chapter=None, difficulty:Difficulty=None,explore:Explore=None, swipe_times = 0):
+    if explore:
+        SelectExplore( Explore(Explore.Normal-1) if Explore.Normal-1>=Explore.Normal else Explore(Explore.Normal+1))
+        sleep(1)
+        SelectExplore(explore)
+        sleep(1)
+    Go_level(event, chapter, difficulty, swipe_times)
