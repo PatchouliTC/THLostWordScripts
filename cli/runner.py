@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-
+import sys
 
 def setup(debugmode:bool=False):
     """
@@ -9,10 +8,10 @@ def setup(debugmode:bool=False):
         :return :bool
     """
     import logging
-
+    import signal
     from core import setup_log
     from core.setting import Settings as ST
-
+    
     from airtest.utils.logger import set_root_logger_level
 
     #LOG SET:DEBUG OR NOT
@@ -27,6 +26,7 @@ def setup(debugmode:bool=False):
     from core.plan_manager import planmanager as pm
 
 
+    
     device, cycletime, plans = make_plan()
 
     grant_adb_permission(device)
@@ -39,6 +39,21 @@ def setup(debugmode:bool=False):
     
     from airtest.core.android.adb import ADB
     from airtest.core.api import connect_device
+    from airtest.core.api import device as G
+
+
+    def cancel_handler(signal,frame):
+        ST.MANUAL_CANCEL=True
+        logger.info('人工终止')
+        if G:
+            ADB().disconnect()
+        ADB().kill_server()
+        sys.exit(0)
+            
+
+    signal.signal(signal.SIGINT,cancel_handler)
+    signal.signal(signal.SIGTERM, cancel_handler)
+
     #Droid Connection
     if not device:
         logger.info('未定义目标设备，搜寻并返回可用android设备...')
@@ -80,5 +95,7 @@ def setup(debugmode:bool=False):
     ADB().kill_server()
     return True
 
+
 def generate_device_url(args):
     print("not finished")
+

@@ -4,7 +4,6 @@ __pycache__
 *.pyproj
 *.pyc
 /scripts/script_resault/*
-
 .idea/
 *.iml
 plan.json
