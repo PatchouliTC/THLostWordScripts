@@ -4,8 +4,13 @@ from core.battle import *
 from . import RESAULTPATH, TEMPLATEPATH
 
 class remilia_L234(Battle):
+    """
+        重写了start方法，不会进行选关
+        因为group为none 不会进行队伍切换
+        需要手动切到关卡页面并将对应关卡置于框最上面(M3高度)
+    """
     ScriptName='event_dd'
-    Description='摸你傻揍帝帝组'
+    Description='摸你傻+蓝揍帝帝组'
     ENABLERECORD=False
     #关卡
     LEVEL_NAME = "EL234"
@@ -14,6 +19,15 @@ class remilia_L234(Battle):
 
     def __init__(self):
         super().__init__(base=RESAULTPATH,module=__name__)
+
+
+    def start(self):
+        self.Logger.info(f'关卡 {self.LEVEL_NAME}')
+        #raise NotImplementedError('BaseScript-start error-No Function Defined')
+
+        self.first_time = True
+        self.in_battle = False
+        self.first_time = False
 
     def InitSelectLevel(self):
         '''初始化选择章节方法'''
@@ -36,6 +50,9 @@ class remilia_L234(Battle):
         util.WaitStatic()
         util.boost()
         util.use_skill(Skill.A)
+        util.use_spell(Spell.LW)
+        sleep(1.5)
+        util.boost()
         util.use_spell(Spell.LW)
         sleep(self.wave_resttime)
 
