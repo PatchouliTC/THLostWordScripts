@@ -1,32 +1,48 @@
 # -*- coding: utf-8 -*-
+
+import logging
+import signal
 import sys
 
-def setup(debugmode:bool=False):
+from airtest.core.android.adb import ADB
+from airtest.core.api import connect_device
+from airtest.core.api import device as G
+from airtest.utils.logger import set_root_logger_level
+
+from core import setup_log
+from core.helper import make_plan, grant_adb_permission
+from core.plan_manager import planmanager as pm
+from core.setting import Settings as ST
+
+logger = setup_log()
+
+
+def cancel_handler(signal, frame):
+    ST.MANUAL_CANCEL = True
+    logger.info('人工终止')
+    if G:
+        ADB().disconnect()
+    ADB().kill_server()
+    sys.exit(0)
+
+
+def setup(debugmode: bool = False):
     """
         setup project if cli give run command
         :param debugmode:Set logger level debug or not
         :return :bool
     """
-    import logging
-    import signal
-    from core import setup_log
-    from core.setting import Settings as ST
-    
-    from airtest.utils.logger import set_root_logger_level
 
-    #LOG SET:DEBUG OR NOT
+    signal.signal(signal.SIGINT, cancel_handler)
+    signal.signal(signal.SIGTERM, cancel_handler)
+
+    # LOG SET:DEBUG OR NOT
     if debugmode:
         set_root_logger_level(logging.DEBUG)
     else:
         set_root_logger_level(logging.INFO)
-        ST.LOG_LEVLE=logging.INFO
-    logger=setup_log()
+        ST.LOG_LEVLE = logging.INFO
 
-    from core.helper import make_plan, grant_adb_permission
-    from core.plan_manager import planmanager as pm
-
-
-    
     device, cycletime, plans = make_plan()
 
     grant_adb_permission(device)
@@ -36,25 +52,8 @@ def setup(debugmode:bool=False):
     if not planmanager.set_plan(plans, cycletime):
         logger.info('无计划任务，直接终止')
         return False
-    
-    from airtest.core.android.adb import ADB
-    from airtest.core.api import connect_device
-    from airtest.core.api import device as G
 
-
-    def cancel_handler(signal,frame):
-        ST.MANUAL_CANCEL=True
-        logger.info('人工终止')
-        if G:
-            ADB().disconnect()
-        ADB().kill_server()
-        sys.exit(0)
-            
-
-    signal.signal(signal.SIGINT,cancel_handler)
-    signal.signal(signal.SIGTERM, cancel_handler)
-
-    #Droid Connection
+    # Droid Connection
     if not device:
         logger.info('未定义目标设备，搜寻并返回可用android设备...')
         try:
@@ -82,8 +81,8 @@ def setup(debugmode:bool=False):
             instance = connect_device(device)
         except Exception as e:
             logger.error(f'连接发生错误({str(e)})')
-            instance=None
-    
+            instance = None
+
     if instance:
         logger.info(f"连接成功，开始执行计划任务")
         planmanager.run_plans()
@@ -103,4 +102,3 @@ def setup(debugmode:bool=False):
 
 def generate_device_url(args):
     print("not finished")
-
